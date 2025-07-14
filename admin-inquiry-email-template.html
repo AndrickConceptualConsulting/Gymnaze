@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New GYMNAZE Inquiry</title>
+  <style>
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+    }
+    .email-wrapper {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #293E89, #1976d2);
+      padding: 20px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #ffffff;
+      margin: 0;
+      font-size: 24px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .alert-badge {
+      background-color: #F8A61E;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .content {
+      padding: 30px;
+    }
+    .info-section {
+      background-color: #f8f9fa;
+      border-left: 4px solid #293E89;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .info-section h3 {
+      margin-top: 0;
+      color: #293E89;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 15px 0;
+    }
+    .data-item {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+    }
+    .data-label {
+      font-weight: bold;
+      color: #555;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .data-value {
+      color: #333;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .highlight-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #293E89;
+    }
+    .action-section {
+      background: linear-gradient(135deg, #F8A61E, #ff9800);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 25px 0;
+    }
+    .action-section h3 {
+      margin: 0 0 10px 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .reply-button {
+      background-color: #293E89;
+      color: #ffffff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .notes-section {
+      background-color: #fff3e0;
+      border: 1px solid #F8A61E;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+    .footer {
+      background-color: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #666666;
+    }
+    @media screen and (max-width: 600px) {
+      .content {
+        padding: 20px;
+      }
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="header">
+      <h1>🏆 New GYMNAZE Inquiry</h1>
+      <div class="alert-badge">Action Required</div>
+      <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 14px;">
+        Received on {{submission_date}} at {{submission_time}}
+      </p>
+    </div>
+    
+    <div class="content">
+      <div class="info-section">
+        <h3>📞 Contact Information</h3>
+        <div class="data-grid">
+          <div class="data-item">
+            <div class="data-label">Full Name</div>
+            <div class="data-value">{{full_name}}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Email Address</div>
+            <div class="data-value">{{user_email}}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Organization</div>
+            <div class="data-value">{{organization}}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Role/Title</div>
+            <div class="data-value">{{role}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>🏃‍♂️ Program Details</h3>
+        <div class="data-grid">
+          <div class="data-item">
+            <div class="data-label">Number of Athletes</div>
+            <div class="data-value highlight-number">{{number_of_athletes}}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Primary Interest</div>
+            <div class="data-value">{{interest}}</div>
+          </div>
+        </div>
+      </div>
+
+      {{#notes}}
+      <div class="notes-section">
+        <h3 style="margin-top: 0; color: #F8A61E;">📝 Additional Notes</h3>
+        <p style="margin: 0; font-style: italic; line-height: 1.6;">{{notes}}</p>
+      </div>
+      {{/notes}}
+
+      <div class="action-section">
+        <h3>⏰ Follow-Up Required</h3>
+        <p style="margin: 0; font-size: 16px;">
+          Please respond within <strong>24 hours</strong> for optimal conversion.
+        </p>
+        <a href="mailto:{{user_email}}?subject=Re: Your GYMNAZE Inquiry - {{organization}}&body=Hi {{user_name}},%0D%0A%0D%0AThank you for your interest in GYMNAZE for {{organization}}. I'd love to discuss how we can help your team of {{number_of_athletes}} athletes...%0D%0A%0D%0ABest regards,%0D%0AZach Johnson%0D%0ACEO, GYMNAZE" 
+           class="reply-button">
+          📧 Reply to {{user_name}}
+        </a>
+      </div>
+
+      <div class="info-section">
+        <h3>📊 Inquiry Details</h3>
+        <div class="data-grid">
+          <div class="data-item">
+            <div class="data-label">Inquiry ID</div>
+            <div class="data-value">{{inquiry_id}}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Source</div>
+            <div class="data-value">Website Inquiry Form</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Date Submitted</div>
+            <div class="data-value">{{submission_date}}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Time Submitted</div>
+            <div class="data-value">{{submission_time}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background-color: #e3f2fd; padding: 15px; border-radius: 6px; margin-top: 20px;">
+        <p style="margin: 0; color: #333; font-size: 14px;">
+          <strong>💡 Quick Stats:</strong> This inquiry represents a potential client with {{number_of_athletes}} athletes. 
+          Based on team size, estimated annual value could range from $XXX - $XXX.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>GYMNAZE Inquiry Management System</strong></p>
+      <p>This notification was automatically generated when someone filled out the inquiry form on gymnaze.com</p>
+      <p>To reply, simply click the email button above or respond directly to {{user_email}}</p>
+    </div>
+  </div>
+</body>
+</html>
