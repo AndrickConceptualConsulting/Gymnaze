@@ -1,10 +1,11 @@
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase';
+import { sendNewsletterEmails, validateEmailJSConfig } from './emailService';
 
 /**
- * Submit a newsletter signup to Firestore
+ * Submit a newsletter signup to Firestore and send welcome emails
  * @param {Object} data - The newsletter signup data
- * @returns {Promise<string>} - Returns the signup ID
+ * @returns {Promise<Object>} - Returns the signup ID and email status
  */
 export const submitNewsletterSignup = async (data) => {
   try {
@@ -37,12 +38,69 @@ export const submitNewsletterSignup = async (data) => {
 
     console.log('📧 Submitting newsletter signup to Firestore:', signupData);
 
-    // Save to Firestore in 'newsletter_signups' collection
+    // Save to Firestore in 'newsletter_signups' collection first
     await setDoc(doc(db, 'newsletter_signups', signupId), signupData);
     
     console.log('✅ Successfully saved newsletter signup to Firestore:', signupId);
 
-    return signupId;
+    // Send emails if EmailJS is configured
+    let emailResult = { success: false, message: 'EmailJS not configured' };
+    
+    if (validateEmailJSConfig()) {
+      try {
+        console.log('📧 Sending newsletter welcome emails...');
+        
+        // Prepare subscriber data for emails
+        const subscriberData = {
+          ...signupData,
+          name: data.firstName, // EmailJS expects 'name' field
+          email: data.email
+        };
+        
+        emailResult = await sendNewsletterEmails(subscriberData);
+        
+        if (emailResult.success) {
+          console.log('✅ Newsletter emails sent successfully');
+          
+          // Update Firestore with email status
+          await setDoc(doc(db, 'newsletter_signups', signupId), {
+            ...signupData,
+            emailsSent: true,
+            emailsSentAt: serverTimestamp(),
+            emailDetails: emailResult.details
+          });
+        } else {
+          console.warn('⚠️ Some newsletter emails failed to send:', emailResult.errors);
+          
+          // Update Firestore with email failure
+          await setDoc(doc(db, 'newsletter_signups', signupId), {
+            ...signupData,
+            emailsSent: false,
+            emailError: emailResult.errors,
+            emailErrorAt: serverTimestamp()
+          });
+        }
+      } catch (emailError) {
+        console.error('❌ Error sending newsletter emails:', emailError);
+        
+        // Update Firestore with email error
+        await setDoc(doc(db, 'newsletter_signups', signupId), {
+          ...signupData,
+          emailsSent: false,
+          emailError: emailError.message,
+          emailErrorAt: serverTimestamp()
+        });
+        
+        emailResult = { success: false, error: emailError.message };
+      }
+    } else {
+      console.warn('⚠️ EmailJS not configured - skipping email sending');
+    }
+
+    return {
+      signupId,
+      emailStatus: emailResult
+    };
   } catch (error) {
     console.error('❌ Error submitting newsletter signup:', error);
     

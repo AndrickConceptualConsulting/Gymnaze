@@ -1,13 +1,17 @@
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase';
+import { sendInquiryEmails, validateEmailJSConfig } from './emailService';
 
 /**
- * Submit an inquiry to Firestore
+ * Submit an inquiry to Firestore and send confirmation emails
  * @param {Object} data - The form data to submit
- * @returns {Promise<string>} - Returns the inquiry ID
+ * @returns {Promise<Object>} - Returns the inquiry ID and email status
  */
 export const submitInquiry = async (data) => {
   try {
+    // Validate form data first
+    validateInquiryData(data);
+
     // Generate unique ID for the inquiry
     const inquiryId = `inquiry_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
@@ -23,12 +27,61 @@ export const submitInquiry = async (data) => {
 
     console.log('📝 Submitting to Firestore:', inquiryData);
 
-    // Save to Firestore
+    // Save to Firestore first
     await setDoc(doc(db, 'inquiries', inquiryId), inquiryData);
     
     console.log('✅ Successfully saved to Firestore:', inquiryId);
 
-    return inquiryId;
+    // Send emails if EmailJS is configured
+    let emailResult = { success: false, message: 'EmailJS not configured' };
+    
+    if (validateEmailJSConfig()) {
+      try {
+        console.log('📧 Sending inquiry emails...');
+        emailResult = await sendInquiryEmails(inquiryData);
+        
+        if (emailResult.success) {
+          console.log('✅ Inquiry emails sent successfully');
+          
+          // Update Firestore with email status
+          await setDoc(doc(db, 'inquiries', inquiryId), {
+            ...inquiryData,
+            emailsSent: true,
+            emailsSentAt: serverTimestamp(),
+            emailDetails: emailResult.details
+          });
+        } else {
+          console.warn('⚠️ Some inquiry emails failed to send:', emailResult.errors);
+          
+          // Update Firestore with email failure
+          await setDoc(doc(db, 'inquiries', inquiryId), {
+            ...inquiryData,
+            emailsSent: false,
+            emailError: emailResult.errors,
+            emailErrorAt: serverTimestamp()
+          });
+        }
+      } catch (emailError) {
+        console.error('❌ Error sending inquiry emails:', emailError);
+        
+        // Update Firestore with email error
+        await setDoc(doc(db, 'inquiries', inquiryId), {
+          ...inquiryData,
+          emailsSent: false,
+          emailError: emailError.message,
+          emailErrorAt: serverTimestamp()
+        });
+        
+        emailResult = { success: false, error: emailError.message };
+      }
+    } else {
+      console.warn('⚠️ EmailJS not configured - skipping email sending');
+    }
+
+    return {
+      inquiryId,
+      emailStatus: emailResult
+    };
   } catch (error) {
     console.error('❌ Error submitting inquiry:', error);
     throw error;
