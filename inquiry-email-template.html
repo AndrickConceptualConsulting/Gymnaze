@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank you for your GYMNAZE inquiry</title>
+  <style>
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+    }
+    .email-wrapper {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .header {
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .header img {
+      max-width: 200px;
+      height: auto;
+    }
+    .content {
+      padding: 30px;
+    }
+    h1 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 24px;
+      color: #293E89;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .highlight {
+      background-color: #F8A61E;
+      color: #ffffff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .info-box {
+      background-color: #f8f9fa;
+      border-left: 4px solid #293E89;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .footer {
+      background-color: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #666666;
+    }
+    @media screen and (max-width: 600px) {
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="header">
+      <img src="https://deansroundtable.org/wp-content/uploads/2025/07/GymnazeLogo-3.png" alt="GYMNAZE Logo">
+    </div>
+    <div class="content">
+      <h1>Hi {{user_name}},</h1>
+      <p>Thank you for your interest in bringing <strong>GYMNAZE</strong> to {{organization}}! We're excited about the opportunity to work with your team of {{number_of_athletes}} athletes.</p>
+      
+      <div class="info-box">
+        <p><strong>What happens next:</strong></p>
+        <p>Our team will review your inquiry and reach out within <strong>24 hours</strong> to discuss your specific needs and next steps.</p>
+      </div>
+
+      <p>Here's what we'll cover in our conversation:</p>
+      <ul>
+        <li>Customized onboarding process for your program</li>
+        <li>Implementation timeline and training</li>
+        <li>Pricing options tailored to your team size</li>
+        <li>How GYMNAZE can help your athletes develop mental toughness</li>
+      </ul>
+
+      {{#interest}}
+      <p class="highlight">Primary Interest: {{interest}}</p>
+      {{/interest}}
+
+      {{#notes}}
+      <div class="info-box">
+        <p><strong>Your Additional Notes:</strong></p>
+        <p>{{notes}}</p>
+      </div>
+      {{/notes}}
+
+      <p>In the meantime, feel free to reply to this email with any questions or call us at <strong>(555) 123-GYMN</strong>.</p>
+
+      <p>We're looking forward to helping your athletes unlock their mental potential!</p>
+
+      <p>Best regards,<br><strong>The GYMNAZE Team</strong></p>
+    </div>
+    <div class="footer">
+      <p>GYMNAZE - Unlocking Athlete Mindset Insights</p>
+      <p>Email: {{reply_to}} | Website: gymnaze.com</p>
+      <p>© 2025 GYMNAZE, LLC — All rights reserved</p>
+    </div>
+  </div>
+</body>
+</html>

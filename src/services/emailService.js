@@ -21,9 +21,13 @@ emailjs.init(EMAILJS_CONFIG.publicKey);
  */
 export const sendInquiryUserEmail = async (inquiryData) => {
   try {
+    // Extract first name from full name for personalization
+    const firstName = inquiryData.name ? inquiryData.name.split(' ')[0] : 'there';
+    
     const templateParams = {
       to_email: inquiryData.email,
-      user_name: inquiryData.name,
+      user_name: firstName, // Use first name for personalization
+      full_name: inquiryData.name, // Keep full name available if needed
       organization: inquiryData.organization,
       role: inquiryData.role,
       number_of_athletes: inquiryData.numberOfAthletes,
