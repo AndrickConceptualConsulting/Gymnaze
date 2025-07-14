@@ -1,0 +1,136 @@
+// Temporary debug component to view Firestore data
+// Add this to your src/components/ folder
+
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { db } from '../services/firebase';
+import { 
+  Paper, 
+  Typography, 
+  List, 
+  ListItem, 
+  ListItemText, 
+  Button, 
+  Box,
+  Chip,
+  Divider 
+} from '@mui/material';
+
+const FirestoreDebugViewer = () => {
+  const [inquiries, setInquiries] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const loadInquiries = async () => {
+    setLoading(true);
+    try {
+      const q = query(
+        collection(db, 'inquiries'), 
+        orderBy('timestamp', 'desc')
+      );
+      const querySnapshot = await getDocs(q);
+      const inquiriesData = [];
+      
+      querySnapshot.forEach((doc) => {
+        inquiriesData.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+      
+      setInquiries(inquiriesData);
+      console.log('Loaded inquiries:', inquiriesData);
+    } catch (error) {
+      console.error('Error loading inquiries:', error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadInquiries();
+  }, []);
+
+  return (
+    <Paper sx={{ p: 3, m: 2 }}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h5">Firestore Debug Viewer</Typography>
+        <Button 
+          variant="contained" 
+          onClick={loadInquiries}
+          disabled={loading}
+        >
+          {loading ? 'Loading...' : 'Refresh'}
+        </Button>
+      </Box>
+
+      <Typography variant="body2" color="text.secondary" mb={2}>
+        Total inquiries: {inquiries.length}
+      </Typography>
+
+      <List>
+        {inquiries.map((inquiry, index) => (
+          <React.Fragment key={inquiry.id}>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <Box>
+                    <Typography variant="h6">
+                      {inquiry.name} - {inquiry.organization}
+                    </Typography>
+                    <Box mt={1} mb={1}>
+                      <Chip 
+                        label={inquiry.status || 'new'} 
+                        color="primary" 
+                        size="small" 
+                        sx={{ mr: 1 }}
+                      />
+                      <Chip 
+                        label={`${inquiry.numberOfAthletes} athletes`} 
+                        variant="outlined" 
+                        size="small" 
+                      />
+                    </Box>
+                  </Box>
+                }
+                secondary={
+                  <Box mt={1}>
+                    <Typography variant="body2">
+                      <strong>Email:</strong> {inquiry.email}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Role:</strong> {inquiry.role}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Interest:</strong> {inquiry.interest}
+                    </Typography>
+                    {inquiry.notes && (
+                      <Typography variant="body2" sx={{ mt: 1 }}>
+                        <strong>Notes:</strong> {inquiry.notes}
+                      </Typography>
+                    )}
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                      <strong>Submitted:</strong> {
+                        inquiry.timestamp?.toDate?.()?.toLocaleString() || 'Unknown'
+                      }
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      <strong>ID:</strong> {inquiry.id}
+                    </Typography>
+                  </Box>
+                }
+              />
+            </ListItem>
+            {index < inquiries.length - 1 && <Divider />}
+          </React.Fragment>
+        ))}
+      </List>
+
+      {inquiries.length === 0 && !loading && (
+        <Typography variant="body1" textAlign="center" color="text.secondary">
+          No inquiries found. Try submitting the form first!
+        </Typography>
+      )}
+    </Paper>
+  );
+};
+
+export default FirestoreDebugViewer;

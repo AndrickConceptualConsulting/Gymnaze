@@ -1,0 +1,113 @@
+import React, { useState } from 'react';
+import { 
+  Box, 
+  Typography, 
+  Paper, 
+  Button, 
+  List, 
+  ListItem, 
+  ListItemText,
+  Chip,
+  Alert
+} from '@mui/material';
+
+const InquiryDataViewer = () => {
+  const [submissions, setSubmissions] = useState([]);
+
+  // This shows the data that would be saved to Firestore
+  const viewLocalData = () => {
+    // Get data from localStorage 
+    const testData = localStorage.getItem('gymnaze_inquiries');
+    if (testData) {
+      setSubmissions(JSON.parse(testData));
+    } else {
+      alert('No inquiry data found. Submit the form first, then check here!');
+    }
+  };
+
+  const clearData = () => {
+    localStorage.removeItem('gymnaze_inquiries');
+    setSubmissions([]);
+    alert('All test inquiry data cleared!');
+  };
+
+  return (
+    <Paper sx={{ p: 3, mt: 3 }}>
+      <Typography variant="h6" gutterBottom>
+        📊 Test Data Viewer (Simulated Firestore)
+      </Typography>
+      
+      <Box sx={{ mb: 2 }}>
+        <Button 
+          variant="contained" 
+          onClick={viewLocalData}
+          sx={{ mr: 1 }}
+        >
+          View Submitted Data
+        </Button>
+        <Button 
+          variant="outlined" 
+          onClick={clearData}
+          color="error"
+        >
+          Clear Test Data
+        </Button>
+      </Box>
+
+      {submissions.length > 0 ? (
+        <List>
+          {submissions.map((submission, index) => (
+            <ListItem key={index} divider>
+              <ListItemText
+                primary={
+                  <Box>
+                    <Typography variant="subtitle1">
+                      {submission.name} - {submission.organization}
+                    </Typography>
+                    <Box sx={{ mt: 1 }}>
+                      <Chip 
+                        label={`${submission.numberOfAthletes} athletes`} 
+                        size="small" 
+                        color="primary"
+                        sx={{ mr: 1 }}
+                      />
+                      <Chip 
+                        label={submission.interest || 'No interest specified'} 
+                        size="small" 
+                        variant="outlined"
+                      />
+                    </Box>
+                  </Box>
+                }
+                secondary={
+                  <Box sx={{ mt: 1 }}>
+                    <Typography variant="body2">
+                      <strong>Email:</strong> {submission.email}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Role:</strong> {submission.role}
+                    </Typography>
+                    {submission.notes && (
+                      <Typography variant="body2">
+                        <strong>Notes:</strong> {submission.notes}
+                      </Typography>
+                    )}
+                    <Typography variant="body2" color="text.secondary">
+                      <strong>Submitted:</strong> {new Date(submission.timestamp).toLocaleString()}
+                    </Typography>
+                  </Box>
+                }
+              />
+            </ListItem>
+          ))}
+        </List>
+      ) : (
+        <Alert severity="info">
+          No submissions found. Fill out the form above and then click "View Submitted Data"!
+        </Alert>
+      )}
+    </Paper>
+  );
+};
+
+export default InquiryDataViewer;
