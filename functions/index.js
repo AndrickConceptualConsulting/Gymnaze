@@ -291,3 +291,177 @@ exports.resendInquiryEmails = functions.https.onCall(async (data, context) => {
     );
   }
 });
+
+// Newsletter email templates
+const createNewsletterUserEmailTemplate = (subscriberData) => {
+  return {
+    to: subscriberData.email,
+    from: {
+      email: 'noreply@gymnaze.com',
+      name: 'GYMNAZE Team'
+    },
+    subject: 'Welcome to the GYMNAZE Newsletter!',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #1976d2, #42a5f5); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px;">Welcome to GYMNAZE!</h1>
+          <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">
+            Thank you for subscribing to our newsletter
+          </p>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px;">
+          <div style="background: white; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="color: #1976d2; margin-top: 0;">Hi ${subscriberData.name || 'there'},</h2>
+            
+            <p style="font-size: 16px; line-height: 1.6; color: #333; margin: 20px 0;">
+              Welcome to the GYMNAZE community! You're now part of a network of coaches, athletes, and sports professionals 
+              who are transforming how we understand and develop mental performance in sports.
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.6; color: #333; margin: 20px 0;">
+              Here's what you can expect from our newsletter:
+            </p>
+
+            <ul style="color: #333; line-height: 1.8; margin: 20px 0;">
+              <li><strong>Latest Insights:</strong> Research-backed strategies for mental performance</li>
+              <li><strong>Success Stories:</strong> Real results from coaches and athletes using GYMNAZE</li>
+              <li><strong>Tips & Tools:</strong> Practical advice for developing mindset and leadership</li>
+              <li><strong>Product Updates:</strong> New features and improvements to help your team</li>
+            </ul>
+
+            <div style="background: #e3f2fd; border-left: 4px solid #1976d2; padding: 15px; margin: 25px 0;">
+              <p style="margin: 0; color: #333; font-style: italic;">
+                "The mental game is just as important as physical training. GYMNAZE helps us 
+                measure and develop both."
+              </p>
+              <p style="margin: 10px 0 0 0; color: #666; font-size: 14px;">
+                - Coach Jennifer R., Division I Volleyball
+              </p>
+            </div>
+
+            <p style="font-size: 16px; line-height: 1.6; color: #333; margin: 20px 0;">
+              Stay tuned for our next newsletter with exclusive insights and updates!
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.6; color: #333; margin: 20px 0;">
+              Best regards,<br>
+              <strong>The GYMNAZE Team</strong>
+            </p>
+          </div>
+
+          <div style="text-align: center; padding: 20px 0; border-top: 1px solid #ddd;">
+            <p style="color: #666; font-size: 12px; margin: 0;">
+              You're receiving this because you subscribed to GYMNAZE newsletters.<br>
+              <a href="#" style="color: #1976d2;">Unsubscribe</a> | 
+              <a href="https://gymnaze.com" style="color: #1976d2;">Visit our website</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  };
+};
+
+const createNewsletterAdminEmailTemplate = (subscriberData) => {
+  return {
+    to: 'zjohnson@gymnaze.com',
+    from: {
+      email: 'noreply@gymnaze.com',
+      name: 'GYMNAZE Newsletter System'
+    },
+    subject: `📰 New Newsletter Subscriber: ${subscriberData.email}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #1976d2, #42a5f5); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px;">📰 New Newsletter Subscriber</h1>
+          <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">
+            Subscribed on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
+          </p>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px;">
+          <div style="background: white; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2 style="color: #1976d2; margin-top: 0; border-bottom: 2px solid #e3f2fd; padding-bottom: 10px;">Subscriber Information</h2>
+            
+            <div style="margin: 20px 0;">
+              <div style="margin-bottom: 15px;">
+                <strong style="color: #555;">Email:</strong><br>
+                <a href="mailto:${subscriberData.email}" style="color: #1976d2; text-decoration: none; font-size: 16px;">${subscriberData.email}</a>
+              </div>
+              ${subscriberData.name ? `
+              <div style="margin-bottom: 15px;">
+                <strong style="color: #555;">Name:</strong><br>
+                <span style="font-size: 16px; color: #333;">${subscriberData.name}</span>
+              </div>
+              ` : ''}
+              ${subscriberData.interest ? `
+              <div style="margin-bottom: 15px;">
+                <strong style="color: #555;">Interest:</strong><br>
+                <span style="font-size: 16px; color: #333; background: #e3f2fd; padding: 8px 12px; border-radius: 5px; display: inline-block;">
+                  ${subscriberData.interest}
+                </span>
+              </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 8px; border: 1px solid #ddd;">
+            <h4 style="margin: 0 0 10px 0; color: #333;">Quick Stats:</h4>
+            <p style="margin: 0; color: #666; font-size: 14px;">
+              Subscriber ID: ${subscriberData.id}<br>
+              Source: Website Newsletter Form<br>
+              Timestamp: ${new Date().toISOString()}
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  };
+};
+
+// Cloud Function triggered when a new newsletter subscription is created
+exports.sendNewsletterEmails = functions.firestore
+  .document('newsletter/{subscriberId}')
+  .onCreate(async (snap, context) => {
+    try {
+      const subscriberData = snap.data();
+      const subscriberId = context.params.subscriberId;
+
+      console.log(`Processing newsletter subscription ${subscriberId} for ${subscriberData.email}`);
+
+      // Prepare both emails
+      const userEmail = createNewsletterUserEmailTemplate(subscriberData);
+      const adminEmail = createNewsletterAdminEmailTemplate(subscriberData);
+
+      // Send both emails
+      const emailPromises = [
+        sgMail.send(userEmail),
+        sgMail.send(adminEmail)
+      ];
+
+      await Promise.all(emailPromises);
+
+      console.log(`Successfully sent newsletter emails for ${subscriberId}`);
+
+      // Update the subscription document to mark emails as sent
+      await snap.ref.update({
+        emailsSent: true,
+        emailsSentAt: admin.firestore.FieldValue.serverTimestamp()
+      });
+
+      return { success: true };
+
+    } catch (error) {
+      console.error('Error sending newsletter emails:', error);
+      
+      // Update the subscription document to mark email failure
+      await snap.ref.update({
+        emailsSent: false,
+        emailError: error.message,
+        emailErrorAt: admin.firestore.FieldValue.serverTimestamp()
+      });
+
+      return { success: false, error: error.message };
+    }
+  });
