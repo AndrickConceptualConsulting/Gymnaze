@@ -276,32 +276,25 @@ const Parents = () => {
                 </ScrollReveal>
                 
                 <ScrollReveal direction="up" delay={0.4}>
-                  <Box sx={PARENTS_STYLES.buttonGroup}>
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                     {PARENTS_CONTENT.sections.cta.buttons.map((button, index) => (
                       <Button
                         key={button.label}
                         variant={button.variant}
-                        component={Link}
-                        to={button.to}
+                        component={button.to.startsWith('http') ? "a" : Link}
+                        href={button.to.startsWith('http') ? button.to : undefined}
+                        to={button.to.startsWith('http') ? undefined : button.to}
+                        target={button.to.startsWith('http') ? "_blank" : undefined}
+                        rel={button.to.startsWith('http') ? "noopener noreferrer" : undefined}
                         size="large"
                         sx={{
-                          ...(button.variant === 'contained' ? {
-                            backgroundColor: '#F8A61E',
-                            color: 'background.default',
-                            '&:hover': {
-                              backgroundColor: '#d18a0e',
-                              transform: 'translateY(-2px)',
-                              boxShadow: '0 8px 25px rgba(248, 166, 30, 0.4)',
-                            },
-                          } : {
-                            borderColor: 'secondary.main',
-                            color: 'secondary.main',
-                            '&:hover': {
-                              borderColor: 'secondary.dark',
-                              backgroundColor: 'rgba(0, 172, 205, 0.1)',
-                              transform: 'translateY(-2px)',
-                            },
-                          }),
+                          backgroundColor: '#F8A61E',
+                          color: 'background.default',
+                          '&:hover': {
+                            backgroundColor: '#d18a0e',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 8px 25px rgba(248, 166, 30, 0.4)',
+                          },
                           px: 6,
                           py: 2,
                           fontSize: '1.2rem',

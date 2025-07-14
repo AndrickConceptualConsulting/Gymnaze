@@ -38,8 +38,7 @@ export const PARENTS_CONTENT = {
       title: 'You Want the Best for Your Athlete.',
       subtitle: 'Start with the mindset tools that unlock real opportunities.',
       buttons: [
-        { label: 'See Your Child\'s Report', to: '/test', variant: 'contained' },
-        { label: 'Get the Assessment', to: '/demo', variant: 'outlined' }
+        { label: 'Get the Assessment', to: 'https://app.gymnaze.com', variant: 'contained' }
       ]
     }
   },

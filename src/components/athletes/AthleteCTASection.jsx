@@ -58,11 +58,13 @@ const AthleteCTASection = ({
             </ScrollReveal>
             
             <ScrollReveal direction="up" delay={0.4}>
-              <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Button
                   variant="contained"
-                  component={Link}
-                  to="/test"
+                  component="a"
+                  href="https://app.gymnaze.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   size="large"
                   className="backlit-button"
                   aria-label="Take the Gymnaze mindset test"
@@ -74,22 +76,6 @@ const AthleteCTASection = ({
                   }}
                 >
                   Take the Test
-                </Button>
-                <Button
-                  variant="outlined"
-                  component={Link}
-                  to="/demo"
-                  size="large"
-                  className="backlit-subtle"
-                  aria-label="View sample Gymnaze report"
-                  title="See what your report looks like"
-                  onClick={onDemoClick}
-                  sx={{
-                    ...COMPONENT_STYLES.ctaButtonBase,
-                    ...COMPONENT_STYLES.ctaSecondaryButton,
-                  }}
-                >
-                  See Your Report
                 </Button>
               </Box>
             </ScrollReveal>

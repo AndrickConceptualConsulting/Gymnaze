@@ -51,38 +51,38 @@ const CTASection = ({ config }) => {
             </ScrollReveal>
             
             <ScrollReveal direction="up" delay={0.4}>
-              <Stack 
-                direction={{ xs: 'column', sm: 'row' }} 
-                spacing={3} 
-                justifyContent="center"
-                alignItems="center"
-              >
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 {buttons.map((button, index) => (
                   <Button
                     key={index}
-                    variant={index === 0 ? "contained" : "outlined"}
-                    component={Link}
-                    to={button.to}
+                    variant="contained"
+                    component={button.to.startsWith('http') ? "a" : Link}
+                    href={button.to.startsWith('http') ? button.to : undefined}
+                    to={button.to.startsWith('http') ? undefined : button.to}
+                    target={button.to.startsWith('http') ? "_blank" : undefined}
+                    rel={button.to.startsWith('http') ? "noopener noreferrer" : undefined}
                     size="large"
-                    className={index === 0 ? "backlit-button" : "backlit-subtle"}
+                    className="backlit-button"
                     sx={{
-                      backgroundColor: index === 0 ? 'transparent' : 'transparent',
-                      color: index === 0 ? 'background.default' : 'secondary.main',
-                      borderColor: index === 0 ? 'transparent' : 'transparent',
+                      backgroundColor: '#F8A61E',
+                      color: 'background.default',
                       px: 6,
                       py: 2,
                       fontSize: '1.2rem',
                       fontWeight: 600,
                       border: 'none',
-                      position: 'relative',
-                      zIndex: 1,
-                      minWidth: { xs: '200px', sm: 'auto' },
+                      '&:hover': {
+                        backgroundColor: '#d18a0e',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 8px 25px rgba(248, 166, 30, 0.4)',
+                      },
+                      transition: 'all 0.3s ease',
                     }}
                   >
                     {button.label}
                   </Button>
                 ))}
-              </Stack>
+              </Box>
             </ScrollReveal>
           </Box>
         </Box>
