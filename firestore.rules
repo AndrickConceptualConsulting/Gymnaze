@@ -24,8 +24,16 @@ service cloud.firestore {
                     && request.resource.data.source == 'website_inquiry_form'
                     && request.resource.data.timestamp is timestamp;
       
-      // Only authenticated users (admins) can read and update inquiries
-      allow read, update: if request.auth != null;
+      // Allow updates for email status (for email sending confirmation)
+      allow update: if (
+                      // Email status updates
+                      true
+                      && (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['emailsSent', 'emailsSentAt', 'emailDetails']) ||
+                          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['emailsSent', 'emailError', 'emailErrorAt']))
+                    );
+      
+      // Only authenticated users (admins) can read inquiries
+      allow read: if request.auth != null;
       
       // No one can delete inquiries (for audit trail)
       allow delete: if false;
