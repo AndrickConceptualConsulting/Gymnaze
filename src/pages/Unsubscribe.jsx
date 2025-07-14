@@ -100,7 +100,7 @@ const Unsubscribe = () => {
               </Button>
               <Button
                 component={Link}
-                to="/newsletter"
+                to="/inquiry"
                 variant="outlined"
                 sx={{
                   borderColor: 'secondary.main',
@@ -111,7 +111,7 @@ const Unsubscribe = () => {
                   }
                 }}
               >
-                Resubscribe
+                Get Early Access
               </Button>
             </Box>
           </Box>

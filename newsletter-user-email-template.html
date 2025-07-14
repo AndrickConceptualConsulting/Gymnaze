@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to GYMNAZE Newsletter!</title>
+  <style>
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+    }
+    .email-wrapper {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #293E89, #1976d2);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #ffffff;
+      margin: 0;
+      font-size: 28px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .header p {
+      color: rgba(255,255,255,0.9);
+      margin: 10px 0 0 0;
+      font-size: 16px;
+    }
+    .welcome-badge {
+      background-color: #F8A61E;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .content {
+      padding: 30px;
+    }
+    h2 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 22px;
+      color: #293E89;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .benefits-section {
+      background-color: #f8f9fa;
+      border-left: 4px solid #293E89;
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 4px;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .benefit-item {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    .benefit-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .benefit-title {
+      font-weight: bold;
+      color: #293E89;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .benefit-desc {
+      color: #666;
+      font-size: 12px;
+    }
+    .interest-highlight {
+      background: linear-gradient(135deg, #F8A61E, #ff9800);
+      color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .interest-highlight h3 {
+      margin: 0 0 5px 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .cta-section {
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 25px 0;
+    }
+    .cta-button {
+      background-color: #293E89;
+      color: #ffffff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .unsubscribe-section {
+      background-color: #fff3e0;
+      border: 1px solid #F8A61E;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .unsubscribe-link {
+      color: #F8A61E;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .footer {
+      background-color: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #666666;
+    }
+    @media screen and (max-width: 600px) {
+      .content {
+        padding: 20px;
+      }
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+      .header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="header">
+      <h1>🎉 Welcome to GYMNAZE!</h1>
+      <p>You're now part of our elite community</p>
+      <div class="welcome-badge">Newsletter Subscriber</div>
+    </div>
+    
+    <div class="content">
+      <h2>Hi {{user_name}},</h2>
+      
+      <p>Welcome to the <strong>GYMNAZE</strong> newsletter! We're thrilled to have you join our community of athletes, coaches, and sports professionals dedicated to unlocking mental potential in sports.</p>
+      
+      {{#interest}}
+      <div class="interest-highlight">
+        <h3>📌 Your Interest: {{interest}}</h3>
+        <p style="margin: 0; font-size: 14px;">We'll personalize your content based on this preference</p>
+      </div>
+      {{/interest}}
+
+      <div class="benefits-section">
+        <h3 style="margin-top: 0; color: #293E89; font-family: 'Montserrat', Arial, sans-serif;">🏆 What You'll Receive</h3>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon">🎯</div>
+            <div class="benefit-title">Exclusive Content</div>
+            <div class="benefit-desc">Access to premium articles and insights</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">⚡</div>
+            <div class="benefit-title">Early Access</div>
+            <div class="benefit-desc">First to know about new features</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🏃‍♂️</div>
+            <div class="benefit-title">Athlete Tips</div>
+            <div class="benefit-desc">Mental performance strategies</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🧠</div>
+            <div class="benefit-title">Coaching Insights</div>
+            <div class="benefit-desc">Leadership and development tools</div>
+          </div>
+        </div>
+      </div>
+
+      <p>Your first newsletter will arrive within the next week, packed with:</p>
+      <ul style="padding-left: 20px; line-height: 1.8;">
+        <li><strong>Mental Toughness Strategies</strong> - Proven techniques for peak performance</li>
+        <li><strong>Leadership Development</strong> - Building confident, resilient athletes</li>
+        <li><strong>Industry Insights</strong> - Latest trends in sports psychology</li>
+        <li><strong>GYMNAZE Updates</strong> - Product news and feature announcements</li>
+      </ul>
+
+      <div class="cta-section">
+        <h3 style="margin: 0 0 10px 0; color: #293E89;">🚀 Ready to Dive Deeper?</h3>
+        <p style="margin: 0 0 10px 0;">Explore our platform and see how GYMNAZE can help your athletes reach their potential.</p>
+        <a href="https://gymnaze.com" class="cta-button">Visit GYMNAZE Platform</a>
+      </div>
+
+      <p>If you have any questions or want to share feedback, just reply to this email - I personally read every message!</p>
+
+      <p>Thanks for joining our mission to unlock athlete mindset insights!</p>
+
+      <!-- Casey Johnson Email Signature -->
+      <p>Best regards,</p>
+      <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size:14px; color:#000000; line-height:1.4; margin-top: 20px;">
+        <tr>
+          <td style="vertical-align: top; padding-right: 15px;">
+            <img src="https://deansroundtable.org/wp-content/uploads/2025/07/GymnazeLogo-3.png" width="120" height="auto" alt="GYMNAZE Logo" style="display:block; max-width:120px; height:auto; border:0;">
+          </td>
+          <td style="vertical-align: top;">
+            <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size:14px; color:#000000;">
+              <tr>
+                <td style="font-size:16px; font-weight:bold; color:#293E89;">Casey Johnson</td>
+              </tr>
+              <tr>
+                <td style="color:#666666;">Founder & Chief Executive Officer</td>
+              </tr>
+              <tr>
+                <td style="padding-top:8px;">
+                  <a href="mailto:cjohnson@gymnaze.com" style="color:#05ACCE; text-decoration:none;">cjohnson@gymnaze.com</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://gymnaze.com" style="color:#05ACCE; text-decoration:none;">www.gymnaze.com</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <div class="unsubscribe-section">
+        <p style="margin: 0; font-size: 12px; color: #666;">
+          📧 You're receiving this because you subscribed to our newsletter on {{subscription_date}}.
+        </p>
+        <p style="margin: 5px 0 0 0;">
+          <a href="{{unsubscribe_link}}" class="unsubscribe-link">Unsubscribe from future emails</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>GYMNAZE - Unlocking Athlete Mindset Insights</strong></p>
+      <p>Building mental toughness and leadership in sports</p>
+      <p>© 2025 GYMNAZE, LLC — All rights reserved</p>
+    </div>
+  </div>
+</body>
+</html>

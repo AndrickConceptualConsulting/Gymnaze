@@ -174,7 +174,7 @@ const NavigationBar = () => {
     { title: 'Parents', path: '/parents' },
     // { title: 'Pricing', path: '/pricing' }, // Commented out for testing phase
     { title: 'About', path: '/about' },
-    { title: 'Newsletter', path: '/newsletter' }, // Newsletter signup page
+    // { title: 'Newsletter', path: '/newsletter' }, // Temporarily removed from navigation
     { title: 'Early Access', path: '/inquiry' }, // New tab for testing phase
   ];
 

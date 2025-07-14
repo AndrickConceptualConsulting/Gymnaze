@@ -270,7 +270,7 @@ const Footer = () => {
                 </Typography>
                 <Box
                   component={RouterLink}
-                  to="/newsletter"
+                  to="/inquiry"
                   sx={{
                     display: 'inline-block',
                     px: 3,
@@ -289,7 +289,7 @@ const Footer = () => {
                     },
                   }}
                 >
-                  Subscribe
+                  Get Early Access
                 </Box>
               </Box>
             </Grid>
