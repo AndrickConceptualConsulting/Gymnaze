@@ -35,7 +35,7 @@ service cloud.firestore {
     match /newsletter_signups/{signupId} {
       // Anyone can create a newsletter signup
       allow create: if true
-                    && request.resource.data.keys().hasAll(['email', 'firstName', 'timestamp', 'status', 'source', 'id', 'subscribed'])
+                    && request.resource.data.keys().hasAll(['email', 'firstName', 'timestamp', 'status', 'source', 'id', 'subscribed', 'unsubscribeToken'])
                     && request.resource.data.email is string
                     && request.resource.data.email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
                     && request.resource.data.firstName is string
@@ -44,13 +44,23 @@ service cloud.firestore {
                     && request.resource.data.status == 'active'
                     && request.resource.data.source == 'website_newsletter_form'
                     && request.resource.data.subscribed == true
+                    && request.resource.data.unsubscribeToken is string
                     && request.resource.data.timestamp is timestamp;
       
-      // Allow updates for unsubscribe functionality (merge operations)
-      allow update: if true
-                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['subscribed', 'unsubscribedAt', 'status'])
-                    && request.resource.data.subscribed == false
-                    && request.resource.data.status == 'unsubscribed';
+      // Allow updates for unsubscribe functionality and email status updates
+      allow update: if (
+                      // Unsubscribe updates (anyone can unsubscribe)
+                      (true
+                       && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['subscribed', 'unsubscribedAt', 'status'])
+                       && request.resource.data.subscribed == false
+                       && request.resource.data.status == 'unsubscribed')
+                    ) ||
+                    (
+                      // Email status updates (for email sending confirmation)
+                      true
+                      && (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['emailsSent', 'emailsSentAt', 'emailDetails']) ||
+                          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['emailsSent', 'emailError', 'emailErrorAt']))
+                    );
       
       // Only authenticated users (admins) can read newsletter signups
       allow read: if request.auth != null;

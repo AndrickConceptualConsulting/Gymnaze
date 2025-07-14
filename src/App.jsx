@@ -16,6 +16,7 @@ import Parents from './pages/Parents';
 import About from './pages/About';
 import Inquiry from './pages/Inquiry';
 import Newsletter from './pages/Newsletter';
+import Unsubscribe from './pages/Unsubscribe';
 import { PageTransition } from './components/animations/SmartAnimations';
 import ScrollToTop from './utils/ScrollToTop';
 
@@ -147,6 +148,11 @@ function App() {
                 <Route path="/newsletter" element={
                   <PageTransition>
                     <Newsletter />
+                  </PageTransition>
+                } />
+                <Route path="/unsubscribe" element={
+                  <PageTransition>
+                    <Unsubscribe />
                   </PageTransition>
                 } />
                 <Route path="/contact" element={

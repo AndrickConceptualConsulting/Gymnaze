@@ -9,6 +9,7 @@ SUBMISSION DETAILS:
 ACTION REQUIRED: Please follow up within 24 hours for optimal conversion.
 
 Reply directly to {{user_email}} to respond to this inquiry.
+
 ```
 - **Note the Template ID** (example: `template_inquiry_admin`)
 
@@ -17,6 +18,7 @@ Reply directly to {{user_email}} to respond to this inquiry.
 - **Subject**: `Welcome to the GYMNAZE Newsletter!`
 - **Content**:
 ```
+
 Hi {{user_name}},
 
 Welcome to the GYMNAZE community! You're now part of a network of coaches, athletes, and sports professionals who are transforming mental performance in sports.
@@ -35,8 +37,10 @@ Best regards,
 The GYMNAZE Team
 
 ---
+
 You can unsubscribe at any time by replying to this email.
 GYMNAZE - Unlocking Athlete Mindset Insights
+
 ```
 - **Note the Template ID** (example: `template_newsletter_user`)
 
@@ -45,6 +49,7 @@ GYMNAZE - Unlocking Athlete Mindset Insights
 - **Subject**: `📰 New Newsletter Subscriber: {{user_email}}`
 - **Content**:
 ```
+
 New Newsletter Subscriber
 
 SUBSCRIBER INFORMATION:
@@ -58,7 +63,8 @@ SUBSCRIPTION DETAILS:
 • Subscriber ID: {{subscriber_id}}
 
 Total subscribers growing! 🎉
-```
+
+````
 - **Note the Template ID** (example: `template_newsletter_admin`)
 
 ## Step 5: Update Your Environment Variables
@@ -76,20 +82,23 @@ VITE_EMAILJS_NEWSLETTER_ADMIN_TEMPLATE_ID=template_newsletter_admin
 
 # CEO Email for notifications
 VITE_CEO_EMAIL=zjohnson@gymnaze.com
-```
+````
 
 ## Step 6: Test Your Setup
 
 1. **Restart your development server**:
+
    ```bash
    npm run dev
    ```
 
 2. **Fill out both forms on your website**:
+
    - Inquiry form (at `/inquiry`)
    - Newsletter form (at `/newsletter`)
 
 3. **Check your email** for:
+
    - User confirmation emails
    - Admin notification emails
 
@@ -98,6 +107,7 @@ VITE_CEO_EMAIL=zjohnson@gymnaze.com
 ## Step 7: Configure Email Settings in EmailJS Dashboard
 
 ### Set Email Settings:
+
 1. **Go to EmailJS Dashboard → Email Services**
 2. **Click on your Gmail service**
 3. **Configure these settings**:
@@ -106,6 +116,7 @@ VITE_CEO_EMAIL=zjohnson@gymnaze.com
    - **Reply To**: Your support email
 
 ### Rate Limits:
+
 - **Free EmailJS**: 200 emails/month
 - **Paid plans**: Higher limits available
 
@@ -114,16 +125,19 @@ VITE_CEO_EMAIL=zjohnson@gymnaze.com
 ### Common Issues:
 
 1. **"EmailJS not configured" in console**:
+
    - Check that all environment variables are set
    - Restart your development server
    - Verify no typos in template IDs
 
 2. **Emails not sending**:
+
    - Check EmailJS dashboard for error logs
    - Verify templates are published (not draft)
    - Check your Gmail service connection
 
 3. **Template variables not showing**:
+
    - Ensure template variable names match exactly: `{{user_name}}`
    - Variables are case-sensitive
    - Check for typos in template content
@@ -133,18 +147,22 @@ VITE_CEO_EMAIL=zjohnson@gymnaze.com
    - Check that your Gmail account has proper permissions
 
 ### Debug Mode:
+
 To see detailed EmailJS logs, add this to your browser console:
+
 ```javascript
-localStorage.setItem('emailjs_debug', 'true');
+localStorage.setItem("emailjs_debug", "true");
 ```
 
 ## Cost Structure
 
 ### EmailJS Free Tier:
+
 - **200 emails/month**
 - **Perfect for starting out**
 
 ### Upgrade Options:
+
 - **Personal**: $15/month (1,000 emails)
 - **Business**: $35/month (5,000 emails)
 
@@ -165,6 +183,7 @@ localStorage.setItem('emailjs_debug', 'true');
 ## Production Checklist
 
 Before going live:
+
 - [ ] All 4 templates created and tested
 - [ ] Environment variables updated
 - [ ] Both forms tested end-to-end
@@ -175,3 +194,38 @@ Before going live:
 ---
 
 **Support**: If you need help with EmailJS setup, check their [documentation](https://www.emailjs.com/docs/) or contact their support team.
+
+## Unsubscribe System
+
+Your site now includes a complete unsubscribe system:
+
+### How It Works:
+1. **Secure Tokens**: Each newsletter signup gets a unique unsubscribe token
+2. **Unsubscribe Links**: Newsletter emails include personalized unsubscribe links
+3. **Unsubscribe Page**: Dedicated `/unsubscribe` page handles the process
+4. **Database Updates**: Firestore automatically updates subscription status
+
+### Template Updates Needed:
+Add this unsubscribe link to your **Newsletter User Welcome** template:
+```html
+<p style="font-size: 12px; color: #666; text-align: center;">
+No longer want updates? <a href="{{unsubscribe_link}}" style="color: #05ACCE;">Unsubscribe here</a>
+</p>
+```
+
+### Testing Unsubscribe:
+1. Subscribe to newsletter on your site
+2. Check welcome email for unsubscribe link
+3. Click the link to test unsubscribe process
+4. Verify Firebase document shows `subscribed: false`
+
+### Security Features:
+- ✅ **Secure tokens** prevent unauthorized unsubscribes
+- ✅ **No email exposure** in URLs
+- ✅ **One-click unsubscribe** compliance
+- ✅ **Audit trail** maintained in Firestore
+
+### Error Handling:
+- Invalid tokens show helpful error messages
+- Users can retry failed unsubscribe attempts
+- Support contact info provided for issues

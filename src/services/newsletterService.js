@@ -22,9 +22,10 @@ export const submitNewsletterSignup = async (data) => {
       status: 'active',
       source: 'website_newsletter_form',
       id: signupId,
-      // Additional tracking fields for newsletter management
+      // Newsletter subscription settings
       subscribed: true,
       emailVerified: false,
+      unsubscribeToken: generateUnsubscribeToken(), // Generate secure token
       preferences: {
         frequency: 'weekly', // Default frequency
         format: 'html'
@@ -158,7 +159,87 @@ export const checkEmailExists = async (email) => {
 };
 
 /**
- * Unsubscribe a user from the newsletter
+ * Generate a secure unsubscribe token
+ * @returns {string} - A unique token for unsubscribe links
+ */
+const generateUnsubscribeToken = () => {
+  return 'unsub_' + Date.now() + '_' + Math.random().toString(36).substr(2, 12);
+};
+
+/**
+ * Unsubscribe a user from the newsletter using token
+ * @param {string} token - The unsubscribe token
+ * @returns {Promise<Object>} - Returns success status and user info
+ */
+export const unsubscribeByToken = async (token) => {
+  try {
+    const { collection, query, where, getDocs, updateDoc } = await import('firebase/firestore');
+    
+    // Query for the user with this unsubscribe token
+    const newsletterRef = collection(db, 'newsletter_signups');
+    const q = query(newsletterRef, where('unsubscribeToken', '==', token));
+    const snapshot = await getDocs(q);
+    
+    if (snapshot.empty) {
+      throw new Error('Invalid unsubscribe token');
+    }
+    
+    let userInfo = null;
+    const updatePromises = [];
+    
+    snapshot.forEach((docSnapshot) => {
+      const userData = docSnapshot.data();
+      userInfo = {
+        email: userData.email,
+        firstName: userData.firstName || 'Subscriber'
+      };
+      
+      // Update the document to unsubscribe
+      const updatePromise = updateDoc(docSnapshot.ref, {
+        subscribed: false,
+        unsubscribedAt: serverTimestamp(),
+        status: 'unsubscribed'
+      });
+      
+      updatePromises.push(updatePromise);
+    });
+    
+    await Promise.all(updatePromises);
+    
+    console.log('✅ Successfully unsubscribed user with token:', token);
+    
+    return {
+      success: true,
+      userInfo
+    };
+  } catch (error) {
+    console.error('❌ Error unsubscribing by token:', error);
+    throw error;
+  }
+};
+
+/**
+ * Check if a user is subscribed by email
+ * @param {string} email - Email to check
+ * @returns {Promise<boolean>} - Returns true if user is subscribed
+ */
+export const isUserSubscribed = async (email) => {
+  try {
+    const { collection, query, where, getDocs } = await import('firebase/firestore');
+    
+    const newsletterRef = collection(db, 'newsletter_signups');
+    const q = query(newsletterRef, where('email', '==', email), where('subscribed', '==', true));
+    const snapshot = await getDocs(q);
+    
+    return !snapshot.empty;
+  } catch (error) {
+    console.error('Error checking subscription status:', error);
+    return false;
+  }
+};
+
+/**
+ * Unsubscribe a user from the newsletter by signup ID
  * @param {string} signupId - The signup ID to unsubscribe
  * @returns {Promise<void>}
  */
