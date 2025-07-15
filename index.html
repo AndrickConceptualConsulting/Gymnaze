@@ -9,6 +9,8 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.webmanifest">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Search Console verification -->
+    <meta name="google-site-verification" content="8fdd43b6bb5bc73f" />
     <title>GYMNAZE - Athlete Mental Toughness Test & Mental Performance Training</title>
     <meta name="description" content="Take the athlete mental toughness test that reveals what coaches actually want. Get mental performance training insights that give you the competitive edge others miss." />
     
@@ -37,7 +39,43 @@
     />
   </head>
   <body>
-    <div id="root"></div>
+  <div id="root"></div>
+  
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "GYMNAZE",
+      "description": "Athlete Mental Toughness Test & Mental Performance Training",
+      "url": "https://www.gymnaze.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.gymnaze.com/test"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "GYMNAZE",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.gymnaze.com/GymnazeLogo.webp"
+        }
+      },
+      "mainEntity": {
+        "@type": "WebApplication",
+        "name": "Mental Toughness Assessment",
+        "description": "Take the athlete mental toughness test that reveals what coaches actually want",
+        "url": "https://www.gymnaze.com/test",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser"
+      }
+    }
+    </script>
+    
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
