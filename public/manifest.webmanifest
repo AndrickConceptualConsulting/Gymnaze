@@ -1,0 +1,27 @@
+{
+  "name": "GYMNAZE - Mental Performance Training",
+  "short_name": "GYMNAZE",
+  "description": "Take the athlete mental toughness test that reveals what coaches actually want. Get mental performance training insights that give you the competitive edge others miss.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ]
+}
