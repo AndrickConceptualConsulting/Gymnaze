@@ -389,10 +389,8 @@ const Footer = () => {
             Take our assessment and discover the mental attributes that set champion athletes apart.
           </Typography>
           <Box
-            component="a"
-            href="https://app.gymnaze.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            component={RouterLink}
+            to="/early-access"
             sx={{
               display: 'inline-block',
               px: 4,
@@ -411,7 +409,7 @@ const Footer = () => {
               },
             }}
           >
-            Take the Assessment
+            Join Beta
           </Box>
         </Box>
       </Container>
