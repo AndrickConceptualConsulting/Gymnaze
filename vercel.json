@@ -7,6 +7,10 @@
   "devCommand": "npm run dev",
   "rewrites": [
     {
+      "source": "/:file.(png|jpg|jpeg|gif|webp|svg|ico|txt|xml)",
+      "destination": "/:file.:ext"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
