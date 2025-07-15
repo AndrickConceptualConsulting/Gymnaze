@@ -7,8 +7,8 @@
   "devCommand": "npm run dev",
   "rewrites": [
     {
-      "source": "/:path*.:extension",
-      "destination": "/:path.:extension"
+      "source": "/OpenGraphGymnazeLogo2.png",
+      "destination": "/OpenGraphGymnazeLogo2.png"
     },
     {
       "source": "/(.*)",
@@ -33,7 +33,7 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options", 
+          "key": "X-Frame-Options",
           "value": "DENY"
         },
         {
