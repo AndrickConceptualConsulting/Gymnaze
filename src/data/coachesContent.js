@@ -64,7 +64,7 @@ export const leadershipConfig = {
       title: 'Lead With Confidence.',
       body: 'Get the Checklist and Evaluate What Really Matters.',
       buttons: [
-        { label: 'View Tools', to: 'https://app.gymnaze.com' }
+        { label: 'Join Beta', to: '/early-access' }
       ]
     }
   },
@@ -132,7 +132,7 @@ export const leadershipConfig = {
       title: 'Make Culture Your Competitive Advantage.',
       body: 'Schedule a Demo or Get the Checklist.',
       buttons: [
-        { label: 'View Tools', to: 'https://app.gymnaze.com' }
+        { label: 'Join Beta', to: '/early-access' }
       ]
     }
   }

@@ -4,9 +4,6 @@ import React, { useMemo } from 'react';
 // MUI
 import { Box, Typography, Container } from '@mui/material';
 
-// SEO Component
-import SEOHead from '../components/SEOHead';
-
 // MUI Icons
 import {
   Psychology as PsychologyIcon,
@@ -96,26 +93,18 @@ const Athletes = () => {
   const ContentComponent = AthleteContent[athleteType];
 
   return (
-    <>
-      <SEOHead
-        title="How to Get Recruited Without Highlight Videos | Stand Out to College Coaches"
-        description="Learn how to get recruited without highlight videos. Discover recruiting tips that showcase your character, leadership, and game IQ to stand out to college coaches."
-        keywords="how to get recruited without highlight video, how to stand out in college recruiting, recruiting platform alternatives to hudl, recruiting tips for high school athletes, high character athlete definition"
-        ogTitle="Stand Out to College Coaches - GYMNAZE Recruiting Platform"
-        ogDescription="The recruiting platform that helps athletes showcase character, leadership, and mental toughness - the traits coaches actually want."
-      />
-      <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
-        {/* ===== Hero Section ===== */}
-        <Box sx={{ backgroundColor: 'background.default' }}>
-          <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 6 } }}>
-            <ScrollReveal direction="up" delay={0.1}>
-              <Typography
-                variant="h1"
-                component="h1"
-                sx={COMPONENT_STYLES.h1Title}
-              >
-                Discover the Traits College Coaches Actually Want
-              </Typography>
+    <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
+      {/* ===== Hero Section ===== */}
+      <Box sx={{ backgroundColor: 'background.default' }}>
+        <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 6 } }}>
+          <ScrollReveal direction="up" delay={0.1}>
+            <Typography
+              variant="h1"
+              component="h1"
+              sx={COMPONENT_STYLES.h1Title}
+            >
+              Discover the Traits College Coaches Actually Want
+            </Typography>
           </ScrollReveal>
         </Container>
       </Box>
@@ -135,8 +124,7 @@ const Athletes = () => {
         onTestClick={handleTestClick}
         onDemoClick={handleDemoClick}
       />
-      </Box>
-    </>
+    </Box>
   );
 };
 

@@ -5,7 +5,6 @@ import {
   Container,
   Grid,
 } from '@mui/material';
-import SEOHead from '../components/SEOHead';
 import {
   CheckCircle as CheckCircleIcon,
   Psychology as PsychologyIcon,
@@ -67,21 +66,13 @@ const About = () => {
   );
 
   return (
-    <>
-      <SEOHead
-        title="The First Athlete Intelligence Assessment Platform | Game IQ & Leadership Measurement"
-        description="The first athlete intelligence assessment platform measuring game IQ, leadership, and character traits that college coaches actually look for in recruits."
-        keywords="athlete intelligence assessment, game IQ test for athletes, how to measure athlete leadership, traits college coaches look for, sports character evaluation"
-        ogTitle="About GYMNAZE - Athlete Intelligence Assessment Platform"
-        ogDescription="We measure what others miss: the mental traits, leadership qualities, and character that separate good athletes from great ones."
-      />
-      <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
-        {/* Hero Section */}
-        <Box sx={{ backgroundColor: 'background.default' }}>
-          <Container maxWidth="lg" sx={{ pt: { xs: 6, md: 8 }, pb: { xs: 4, md: 6 } }}>
-            <AnimatedSection delay={0.1}>
-              <Typography variant="h1" component="h1" sx={ABOUT_STYLES.heroTitle}>
-                {ABOUT_CONTENT.hero.title}
+    <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
+      {/* Hero Section */}
+      <Box sx={{ backgroundColor: 'background.default' }}>
+        <Container maxWidth="lg" sx={{ pt: { xs: 6, md: 8 }, pb: { xs: 4, md: 6 } }}>
+          <AnimatedSection delay={0.1}>
+            <Typography variant="h1" component="h1" sx={ABOUT_STYLES.heroTitle}>
+              {ABOUT_CONTENT.hero.title}
             </Typography>
           </AnimatedSection>
           
@@ -104,7 +95,7 @@ const About = () => {
       </Box>
 
       {/* Mission Section */}
-      <Box sx={{ backgroundColor: 'background.paper' }}>
+      <Box sx={{ backgroundColor: 'rgba(248, 249, 250, 0.6)' }}>
         <Container maxWidth="lg" sx={{ ...ABOUT_STYLES.sectionPadding, ...ABOUT_STYLES.containerSpacing }}>
           <Grid container spacing={6} alignItems="center" sx={ABOUT_STYLES.gridReset}>
             <Grid item xs={12} md={6}>
@@ -353,7 +344,7 @@ const About = () => {
       </Box>
 
       {/* Features Section */}
-      <Box sx={{ backgroundColor: 'background.paper' }}>
+      <Box sx={{ backgroundColor: 'rgba(248, 249, 250, 0.6)' }}>
         <Container maxWidth="lg" sx={ABOUT_STYLES.sectionPadding}>
           <AnimatedSection>
             <Typography variant="h2" component="h2" sx={ABOUT_STYLES.sectionTitle}>
@@ -453,8 +444,7 @@ const About = () => {
           </AnimatedSection>
         </Container>
       </Box>
-      </Box>
-    </>
+    </Box>
   );
 };
 

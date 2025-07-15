@@ -13,7 +13,6 @@ import {
   useTheme,
   useMediaQuery
 } from '@mui/material';
-import SEOHead from '../components/SEOHead';
 import { motion } from 'framer-motion';
 import { PageTransition } from '../components/animations/SmartAnimations';
 import {
@@ -22,7 +21,6 @@ import {
   RHFCheckbox,
   FormSectionWrapper
 } from '../components/form';
-import { SimpleCaptcha } from '../components/captcha';
 import { submitInquiry } from '../services/inquiryService';
 import {
   validationRules,
@@ -47,7 +45,6 @@ const Inquiry = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [submitStatus, setSubmitStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
   const {
     control,
@@ -65,14 +62,6 @@ const Inquiry = () => {
 
   // Handle form submission
   const onSubmit = async (data) => {
-    if (!isCaptchaVerified) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please complete the human verification to proceed.'
-      });
-      return;
-    }
-
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -82,17 +71,16 @@ const Inquiry = () => {
       // Show success message
       setSubmitStatus({
         type: 'success',
-        message: 'Thank you for joining our beta testing program! We\'ve received your information and will be in touch soon with next steps and early access details.'
+        message: 'Thank you for your interest in GYMNAZE! We\'ve received your information and will be in touch soon to discuss next steps.'
       });
       
       reset(); // Clear form
-      setIsCaptchaVerified(false); // Reset captcha
 
     } catch (error) {
       console.error('❌ Error submitting inquiry:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'There was an error submitting your request. Please try again.'
+        message: 'There was an error submitting your inquiry. Please try again.'
       });
     } finally {
       setIsSubmitting(false);
@@ -101,13 +89,6 @@ const Inquiry = () => {
 
   return (
     <PageTransition>
-      <SEOHead
-        title="Join GYMNAZE Beta Testing Program | Early Access to Mental Performance Platform"
-        description="Join the exclusive GYMNAZE beta testing program. Get early access to the athlete intelligence platform that measures mental toughness, leadership, and character traits coaches value most."
-        keywords="GYMNAZE beta testing, mental performance platform early access, athlete intelligence beta, sports psychology tools beta, mindset training app beta"
-        ogTitle="Join GYMNAZE Beta Testing - Early Access Program"
-        ogDescription="Be among the first to experience the athlete intelligence revolution. Join our exclusive beta testing program for early access to GYMNAZE's mental performance platform."
-      />
       <Box
         sx={{
           minHeight: '100vh',
@@ -135,7 +116,7 @@ const Inquiry = () => {
                   mb: theme.spacing(2)
                 }}
               >
-                Join the GYMNAZE Beta Testing Program
+                Let's Bring GYMNAZE to Your Team
               </Typography>
               <Typography
                 variant="h5"
@@ -147,7 +128,7 @@ const Inquiry = () => {
                   lineHeight: 1.6
                 }}
               >
-                Be among the first to experience the athlete intelligence revolution. Get exclusive early access to GYMNAZE and help shape the future of athlete assessment.
+                Ready to bring Gymnaze to your athletes or team? Submit an inquiry to begin your onboarding process and learn how to unlock athlete mindset insights.
               </Typography>
             </Box>
           </motion.div>
@@ -185,29 +166,26 @@ const Inquiry = () => {
                       mb: theme.spacing(3)
                     }}
                   >
-                    Exclusive Beta Access Program
+                    A Smarter Way to Support Your Athletes Starts Here
                   </Typography>
                   
                   <Typography variant="body1" paragraph sx={{ mb: theme.spacing(3) }}>
-                    Join a select group of forward-thinking coaches, athletic directors, and program leaders who are pioneering the future of athlete development with GYMNAZE.
+                    Whether you're a coach, director, or program leader, GYMNAZE gives you a way to evaluate the leadership, mindset, and sports IQ of your athletes—before they ever hit the field.
                   </Typography>
 
                   <Typography variant="h6" sx={{ fontFamily: 'Montserrat', fontWeight: 600, mb: theme.spacing(2) }}>
-                    What you'll get as a beta tester:
+                    This is your first step to:
                   </Typography>
                   
                   <Box component="ul" sx={{ pl: theme.spacing(2), mb: theme.spacing(4) }}>
                     <Typography component="li" variant="body1" sx={{ mb: theme.spacing(1) }}>
-                      Early access to the complete GYMNAZE platform
+                      Equip athletes with personalized mindset insights
                     </Typography>
                     <Typography component="li" variant="body1" sx={{ mb: theme.spacing(1) }}>
-                      Direct input on features and development priorities
+                      Build a culture of coachability, focus, and resilience
                     </Typography>
                     <Typography component="li" variant="body1" sx={{ mb: theme.spacing(1) }}>
-                      Exclusive beta tester pricing and perks
-                    </Typography>
-                    <Typography component="li" variant="body1" sx={{ mb: theme.spacing(1) }}>
-                      Personal onboarding and support from our team
+                      Make smarter recruiting, development, and leadership decisions
                     </Typography>
                   </Box>
 
@@ -215,17 +193,17 @@ const Inquiry = () => {
                     variant="h6"
                     sx={{ fontFamily: 'Montserrat', fontWeight: 600, mb: theme.spacing(2) }}
                   >
-                    Perfect for Beta Testing
+                    Who Typically Uses This Form
                   </Typography>
                   
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                     {[
                       'High school coaches',
-                      'College coaches',
-                      'Club directors', 
+                      'Club coaches', 
                       'Athletic directors',
-                      'Recruiting coordinators',
-                      'Program innovators'
+                      'Program leaders',
+                      'College coaches',
+                      'Recruiting coordinators'
                     ].map((role, index) => (
                       <Chip
                         key={index}
@@ -261,11 +239,11 @@ const Inquiry = () => {
                       mb: theme.spacing(2)
                     }}
                   >
-                    Apply for Beta Access
+                    Ready to Learn More or Onboard Your Team?
                   </Typography>
                   
                   <Typography variant="body1" sx={{ mb: theme.spacing(4) }}>
-                    Join our exclusive beta testing program and get early access to GYMNAZE before anyone else.
+                    Tell us a little about your team or organization—and we'll take it from there.
                   </Typography>
 
                   {submitStatus && (
@@ -383,13 +361,13 @@ const Inquiry = () => {
                       <Grid item xs={12}>
                         <RHFTextField
                           name="notes"
-                          label="What interests you most about beta testing GYMNAZE?"
+                          label="What's Your Biggest Athlete Evaluation Challenge?"
                           rules={validationRules.notes}
                           control={control}
                           disabled={isSubmitting}
                           multiline
                           rows={4}
-                          placeholder="Tell us what you're most excited to test, any specific challenges you're facing, or questions about the beta program."
+                          placeholder="Tell us what your biggest athlete evaluation challenge is—or drop any questions about GYMNAZE."
                           helperText={`${watchedValues.notes?.length || 0}/1000 characters`}
                         />
                       </Grid>
@@ -398,33 +376,25 @@ const Inquiry = () => {
                       <Grid item xs={12}>
                         <Box sx={{ mt: theme.spacing(2) }}>
                           <Typography variant="h6" sx={{ mb: theme.spacing(2), fontFamily: 'Montserrat', fontWeight: 600 }}>
-                            Beta testing preferences
+                            Help us understand your timeline
                           </Typography>
                           
                           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                             <RHFCheckbox
                               name="wantWalkthrough"
-                              label="I'd like a demo call to understand the beta program better"
+                              label="I'd like to schedule a demo call to learn more about GYMNAZE"
                               control={control}
                               disabled={isSubmitting}
                             />
                             
                             <RHFCheckbox
                               name="readyToPilot"
-                              label="My team is ready to start testing immediately"
+                              label="I'm interested in being part of an early pilot program"
                               control={control}
                               disabled={isSubmitting}
                             />
                           </Box>
                         </Box>
-                      </Grid>
-
-                      {/* Human Verification */}
-                      <Grid item xs={12}>
-                        <SimpleCaptcha 
-                          onVerify={setIsCaptchaVerified}
-                          disabled={isSubmitting}
-                        />
                       </Grid>
 
                       {/* Submit Button */}
@@ -433,7 +403,7 @@ const Inquiry = () => {
                           type="submit"
                           variant="contained"
                           size="large"
-                          disabled={isSubmitting || !isCaptchaVerified}
+                          disabled={isSubmitting}
                           fullWidth={isMobile}
                           sx={{
                             px: theme.spacing(6),
@@ -443,24 +413,17 @@ const Inquiry = () => {
                             fontWeight: 600,
                             borderRadius: 2,
                             textTransform: 'none',
-                            color: 'white !important',
                             background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                            border: 'none',
                             '&:hover': {
-                              color: 'white !important',
                               background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${theme.palette.secondary.dark})`,
                               transform: 'translateY(-2px)',
                               boxShadow: theme.shadows[8]
-                            },
-                            '&:disabled': {
-                              color: 'rgba(255, 255, 255, 0.7) !important',
-                              background: `linear-gradient(45deg, ${theme.palette.primary.light}, ${theme.palette.secondary.light})`,
                             },
                             transition: 'all 0.3s ease'
                           }}
                           startIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : null}
                         >
-                          {isSubmitting ? 'Processing...' : 'Submit Beta Application'}
+                          {isSubmitting ? 'Processing...' : 'Submit Information'}
                         </Button>
                       </Grid>
                     </FormSectionWrapper>
@@ -476,7 +439,7 @@ const Inquiry = () => {
                       fontStyle: 'italic'
                     }}
                   >
-                    We're accepting a limited number of beta testers to ensure the highest quality experience. Applications are reviewed within 2-3 business days.
+                    We're currently working with select teams to refine our platform and ensure the best possible experience for coaches and athletes.
                   </Typography>
                 </Paper>
               </motion.div>

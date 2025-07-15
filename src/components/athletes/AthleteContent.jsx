@@ -52,7 +52,7 @@ export const HighSchoolContent = ({ traits }) => {
       </Box>
 
       {/* Mental Edge Assessment Section - Light Grey Background */}
-      <Box sx={{ backgroundColor: 'rgba(248, 249, 250, 0.6)' }}>
+      <Box sx={{ backgroundColor: 'background.paper' }}>
         <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
           <Grid container spacing={4} alignItems="center" sx={{ 
             '& .MuiGrid-item': { 

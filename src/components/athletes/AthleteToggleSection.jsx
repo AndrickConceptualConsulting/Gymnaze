@@ -13,7 +13,7 @@ import { COMPONENT_STYLES } from '../../constants/athletesData';
 // ===== ATHLETE TOGGLE SECTION =====
 const AthleteToggleSection = ({ athleteType, onAthleteTypeChange, children }) => {
   return (
-    <Box sx={{ backgroundColor: 'rgba(248, 249, 250, 0.6)' }}>
+    <Box sx={{ backgroundColor: 'background.paper' }}>
       <Container maxWidth="lg" sx={{ py: { xs: 3, md: 4 } }}>
         <ScrollReveal direction="up" delay={0.2}>
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>

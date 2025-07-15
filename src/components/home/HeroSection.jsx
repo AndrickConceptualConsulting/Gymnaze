@@ -54,11 +54,11 @@ const HeroSection = () => {
           
           <ScrollReveal direction="up" delay={0.3}>
             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: { xs: 'center', md: 'flex-start' } }}>
-              <PrimaryButton to="/test">
-                Take the Test
+              <PrimaryButton to="/early-access">
+                Join Beta Testing
               </PrimaryButton>
-              <SecondaryButton to="/inquiry">
-                Early Access
+              <SecondaryButton to="/early-access">
+                Get Early Access
               </SecondaryButton>
             </Box>
           </ScrollReveal>

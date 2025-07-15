@@ -14,7 +14,6 @@ import {
 import {
   LinkedIn as LinkedInIcon,
   Email as EmailIcon,
-  Phone as PhoneIcon,
   LocationOn as LocationIcon,
 } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
@@ -32,26 +31,20 @@ const Footer = () => {
     { title: 'Coaches & Leaders', path: '/coaches' },
     { title: 'Parents', path: '/parents' },
     { title: 'About Us', path: '/about' },
-    { title: 'Pricing', path: '/pricing' },
   ];
 
-  const resourceLinks = [
-    { title: 'Blog', path: '/blog' },
-    { title: 'Free Tools', path: '/tools' },
-    { title: 'Webinars & Events', path: '/events' },
-    { title: 'Assessment Demo', path: '/demo' },
+  const betaLinks = [
+    { title: 'Join Beta Program', path: '/early-access' },
+    { title: 'Beta Documentation', path: '/about' },
   ];
 
   const supportLinks = [
-    { title: 'Support Center', path: '/support' },
-    { title: 'Schedule Consultation', path: '/consultation' },
-    { title: 'Contact Us', path: '/contact' },
+    { title: 'Contact Us', path: 'mailto:hello@gymnaze.com' },
+    { title: 'LinkedIn', path: 'https://linkedin.com/company/gymnaze' },
   ];
 
   const legalLinks = [
     { title: 'Privacy Policy', path: '/privacy' },
-    { title: 'Terms of Service', path: '/terms' },
-    { title: 'Cookie Policy', path: '/cookies' },
   ];
 
   const LinkGroup = ({ title, links }) => (
@@ -72,8 +65,11 @@ const Footer = () => {
         {links.map((link, index) => (
           <Link
             key={index}
-            component={RouterLink}
-            to={link.path}
+            component={link.path.startsWith('http') || link.path.startsWith('mailto') ? 'a' : RouterLink}
+            to={link.path.startsWith('http') || link.path.startsWith('mailto') ? undefined : link.path}
+            href={link.path.startsWith('http') || link.path.startsWith('mailto') ? link.path : undefined}
+            target={link.path.startsWith('http') ? '_blank' : undefined}
+            rel={link.path.startsWith('http') ? 'noopener noreferrer' : undefined}
             sx={{
               color: 'text.secondary',
               textDecoration: 'none',
@@ -174,20 +170,6 @@ const Footer = () => {
                       hello@gymnaze.com
                     </Link>
                   </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <PhoneIcon sx={{ color: 'secondary.main', fontSize: '1.2rem' }} />
-                    <Link
-                      href="tel:+1-555-GYMNAZE"
-                      sx={{
-                        color: 'text.secondary',
-                        textDecoration: 'none',
-                        fontSize: { xs: '0.85rem', md: '0.9rem' },
-                        '&:hover': { color: 'secondary.main' },
-                      }}
-                    >
-                      +1 (555) GYMNAZE
-                    </Link>
-                  </Box>
                 </Stack>
 
                 {/* Social Media */}
@@ -235,11 +217,11 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={6} md={2}>
-              <LinkGroup title="Resources" links={resourceLinks} />
+              <LinkGroup title="Beta Access" links={betaLinks} />
             </Grid>
 
             <Grid item xs={12} sm={6} md={2}>
-              <LinkGroup title="Support" links={supportLinks} />
+              <LinkGroup title="Connect" links={supportLinks} />
             </Grid>
 
             {/* Newsletter Signup */}
@@ -270,7 +252,7 @@ const Footer = () => {
                 </Typography>
                 <Box
                   component={RouterLink}
-                  to="/inquiry"
+                  to="/early-access"
                   sx={{
                     display: 'inline-block',
                     px: 3,
@@ -289,7 +271,7 @@ const Footer = () => {
                     },
                   }}
                 >
-                  Get Early Access
+                  Join Beta
                 </Box>
               </Box>
             </Grid>
@@ -407,8 +389,10 @@ const Footer = () => {
             Take our assessment and discover the mental attributes that set champion athletes apart.
           </Typography>
           <Box
-            component={RouterLink}
-            to="/test"
+            component="a"
+            href="https://app.gymnaze.com"
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
               display: 'inline-block',
               px: 4,

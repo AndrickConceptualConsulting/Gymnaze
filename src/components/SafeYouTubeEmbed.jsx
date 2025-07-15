@@ -60,18 +60,20 @@ const SafeYouTubeEmbed = ({ videoId, title, thumbnail }) => {
           backgroundImage: `url(${thumbnailUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           '&:hover .play-button': {
             transform: 'scale(1.1)',
           }
         }}
         onClick={handleLoadVideo}
       >
+        {/* Play Button - Centered Absolutely */}
         <Box
           className="play-button"
           sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             width: 80,
             height: 80,
             borderRadius: '50%',
@@ -80,8 +82,10 @@ const SafeYouTubeEmbed = ({ videoId, title, thumbnail }) => {
             alignItems: 'center',
             justifyContent: 'center',
             transition: 'transform 0.2s ease-in-out',
+            zIndex: 2,
             '&:hover': {
               backgroundColor: 'rgba(255, 0, 0, 1)',
+              transform: 'translate(-50%, -50%) scale(1.1)',
             }
           }}
         >
@@ -98,6 +102,7 @@ const SafeYouTubeEmbed = ({ videoId, title, thumbnail }) => {
             background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
             color: 'white',
             p: 2,
+            zIndex: 1,
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 500 }}>

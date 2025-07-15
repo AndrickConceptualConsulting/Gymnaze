@@ -11,7 +11,6 @@ import {
   useTheme,
   useMediaQuery
 } from '@mui/material';
-import SEOHead from '../components/SEOHead';
 import { Email as EmailIcon } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { PageTransition } from '../components/animations/SmartAnimations';
@@ -69,13 +68,6 @@ const Newsletter = () => {
 
   return (
     <PageTransition>
-      <SEOHead
-        title="Weekly Recruiting Tips & Mental Performance Insights | GYMNAZE Newsletter"
-        description="Weekly recruiting tips and mental performance insights that give athletes the edge. Expert strategies for developing leadership and standing out to coaches."
-        keywords="recruiting tips for high school athletes, mental performance training, sports psychology tools, athlete development newsletter, college recruiting advice"
-        ogTitle="GYMNAZE Newsletter - Athlete Development Insights"
-        ogDescription="Get weekly insights on recruiting, mental performance, and athlete development strategies that create competitive advantages."
-      />
       <Box
         sx={{
           minHeight: '100vh',

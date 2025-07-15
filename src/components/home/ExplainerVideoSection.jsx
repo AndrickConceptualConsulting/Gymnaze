@@ -69,7 +69,7 @@ const ExplainerVideoSection = () => {
     <Box
       sx={{
         py: { xs: 8, md: 12 },
-        backgroundColor: 'rgba(248, 249, 250, 0.6)',
+        backgroundColor: 'background.paper',
         background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.primary.main}08 100%)`,
       }}
     >

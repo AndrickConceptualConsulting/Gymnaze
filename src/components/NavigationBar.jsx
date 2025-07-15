@@ -175,7 +175,7 @@ const NavigationBar = () => {
     // { title: 'Pricing', path: '/pricing' }, // Commented out for testing phase
     { title: 'About', path: '/about' },
     // { title: 'Newsletter', path: '/newsletter' }, // Temporarily removed from navigation
-    { title: 'Early Access', path: '/inquiry' }, // New tab for testing phase
+    { title: 'Early Access', path: '/early-access' }, // New tab for testing phase
   ];
 
   // Commented out for testing phase
@@ -250,7 +250,7 @@ const NavigationBar = () => {
       <Button
         variant="contained"
         component={Link}
-        to="/test"
+        to="/early-access"
         size="medium"
         className="backlit-button"
         sx={{
@@ -264,7 +264,7 @@ const NavigationBar = () => {
           zIndex: 1,
         }}
       >
-        Take the Test
+        Join Beta
       </Button>
     </Box>
   );
@@ -532,7 +532,7 @@ const NavigationBar = () => {
                       <Button
                         variant="contained"
                         component={Link}
-                        to="/test"
+                        to="/early-access"
                         onClick={handleNavClick}
                         fullWidth
                         className="backlit-button"
@@ -545,7 +545,7 @@ const NavigationBar = () => {
                           zIndex: 1,
                         }}
                       >
-                        Take the Test
+                        Join Beta Testing
                       </Button>
                     </motion.div>
                   </Box>

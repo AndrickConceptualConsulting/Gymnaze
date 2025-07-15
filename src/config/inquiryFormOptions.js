@@ -51,13 +51,14 @@ export const validationRules = {
   }
 };
 
-// Interest options for dropdown - Updated with better segmentation
+// Interest options for dropdown - Updated for beta testing program
 export const interestOptions = [
-  { value: 'testing-with-team', label: 'Testing this with my team' },
-  { value: 'learning-assessment', label: 'Learning how the assessment works' },
-  { value: 'development-metrics', label: 'Understanding athlete development metrics' },
-  { value: 'recruiting-decisions', label: 'Using data to support recruiting decisions' },
-  { value: 'not-sure', label: 'Not sure yet' }
+  { value: 'beta-testing', label: 'Beta testing new athlete assessment tools' },
+  { value: 'early-platform-access', label: 'Early access to the full platform' },
+  { value: 'pilot-program', label: 'Running a pilot program with my team' },
+  { value: 'recruiting-enhancement', label: 'Enhancing our recruiting process' },
+  { value: 'athlete-development', label: 'Improving athlete development programs' },
+  { value: 'exploring-options', label: 'Exploring options for our program' }
 ];
 
 // Role options for dropdown

@@ -8,7 +8,6 @@ import {
   Button,
   Paper
 } from '@mui/material';
-import SEOHead from '../components/SEOHead';
 import { CheckCircle, ErrorOutline } from '@mui/icons-material';
 import { Link, useSearchParams } from 'react-router-dom';
 import { unsubscribeByToken } from '../services/newsletterService';
@@ -171,16 +170,8 @@ const Unsubscribe = () => {
   };
 
   return (
-    <>
-      <SEOHead
-        title="Unsubscribe from GYMNAZE Newsletter | Manage Email Preferences"
-        description="Unsubscribe from Gymnaze newsletters. Manage your athlete development and recruiting insights email preferences easily and securely."
-        keywords="unsubscribe GYMNAZE newsletter, manage email preferences, athlete development newsletter, recruiting insights"
-        ogTitle="Newsletter Unsubscribe - GYMNAZE"
-        ogDescription="Manage your GYMNAZE newsletter subscription preferences or unsubscribe from our athlete development insights."
-      />
-      <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh', py: 8 }}>
-        <Container maxWidth="md">
+    <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh', py: 8 }}>
+      <Container maxWidth="md">
         <Paper
           elevation={3}
           sx={{
@@ -203,8 +194,7 @@ const Unsubscribe = () => {
           </Typography>
         </Box>
       </Container>
-      </Box>
-    </>
+    </Box>
   );
 };
 

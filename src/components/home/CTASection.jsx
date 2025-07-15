@@ -58,11 +58,11 @@ const CTASection = () => {
             
             <ScrollReveal direction="up" delay={0.4}>
               <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-                <CTAPrimaryButton to="/test">
-                  Take the Test
+                <CTAPrimaryButton to="/early-access">
+                  Join Beta Testing
                 </CTAPrimaryButton>
-                <CTASecondaryButton to="/inquiry">
-                  Early Access
+                <CTASecondaryButton to="/early-access">
+                  Get Early Access
                 </CTASecondaryButton>
               </Box>
             </ScrollReveal>

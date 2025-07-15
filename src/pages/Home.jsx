@@ -4,6 +4,9 @@ import React from 'react';
 // MUI
 import { Box } from '@mui/material';
 
+// SEO Component
+import SEOHead from '../components/SEOHead';
+
 // MUI Icons
 import {
   Psychology as PsychologyIcon,
@@ -57,31 +60,40 @@ const whyChooseFeatures = whyChooseFeaturesData.map(item => {
 // ===== PAGE COMPONENT =====
 const HomePage = () => {
   return (
-    <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
-      {/* ===== Hero Section ===== */}
-      <HeroSection />
-      
-      {/* ===== Explainer Video Section ===== */}
-      <ExplainerVideoSection />
-      
-      {/* ===== Problem Section ===== */}
-      <ProblemSection />
-      
-      {/* ===== Mental Attributes Section ===== */}
-      <MentalAttributesSection attributes={mentalAttributes} />
-      
-      {/* ===== Coaches Section ===== */}
-      <CoachesSection />
-      
-      {/* ===== Results Section ===== */}
-      <ResultsSection benefits={benefits} />
-      
-      {/* ===== Why Choose Section ===== */}
-      <WhyChooseSection features={whyChooseFeatures} />
-      
-      {/* ===== CTA Section ===== */}
-      <CTASection />
-    </Box>
+    <>
+      <SEOHead
+        title="Athlete Mental Toughness Test & Mental Performance Training"
+        description="Take the athlete mental toughness test that reveals what coaches actually want. Get mental performance training insights that give you the competitive edge others miss."
+        keywords="athlete mental toughness test, mental performance training for athletes, mental edge for athletes, sports psychology tools for teams, best mindset training apps for athletes"
+        ogTitle="GYMNAZE - Athlete Mental Toughness Test & Training Platform"
+        ogDescription="The first athlete intelligence assessment platform that measures mental toughness, leadership, and character traits coaches actually value."
+      />
+      <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
+        {/* ===== Hero Section ===== */}
+        <HeroSection />
+        
+        {/* ===== Explainer Video Section ===== */}
+        <ExplainerVideoSection />
+        
+        {/* ===== Problem Section ===== */}
+        <ProblemSection />
+        
+        {/* ===== Mental Attributes Section ===== */}
+        <MentalAttributesSection attributes={mentalAttributes} />
+        
+        {/* ===== Coaches Section ===== */}
+        <CoachesSection />
+        
+        {/* ===== Results Section ===== */}
+        <ResultsSection benefits={benefits} />
+        
+        {/* ===== Why Choose Section ===== */}
+        <WhyChooseSection features={whyChooseFeatures} />
+        
+        {/* ===== CTA Section ===== */}
+        <CTASection />
+      </Box>
+    </>
   );
 };
 

@@ -61,21 +61,19 @@ const AthleteCTASection = ({
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Button
                   variant="contained"
-                  component="a"
-                  href="https://app.gymnaze.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  component={Link}
+                  to="/early-access"
                   size="large"
                   className="backlit-button"
-                  aria-label="Take the Gymnaze mindset test"
-                  title="Start your mental assessment now"
+                  aria-label="Join Gymnaze beta testing program"
+                  title="Get early access to Gymnaze"
                   onClick={onTestClick}
                   sx={{
                     ...COMPONENT_STYLES.ctaButtonBase,
                     ...COMPONENT_STYLES.ctaPrimaryButton,
                   }}
                 >
-                  Take the Test
+                  Join Beta Testing
                 </Button>
               </Box>
             </ScrollReveal>

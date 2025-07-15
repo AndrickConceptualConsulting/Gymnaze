@@ -50,7 +50,7 @@ export const centerSectionHeadingStyle = {
 // ===== BACKGROUND COLORS =====
 export const BACKGROUNDS = {
   default: 'background.default',
-  lightGrey: 'rgba(248, 249, 250, 0.6)',
+  lightGrey: 'background.paper', // Changed to use theme-aware background
 };
 
 // ===== BUTTON STYLES =====

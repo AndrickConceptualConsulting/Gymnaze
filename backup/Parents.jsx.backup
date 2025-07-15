@@ -6,7 +6,6 @@ import {
   Container,
   Grid,
 } from '@mui/material';
-import SEOHead from '../components/SEOHead';
 import ParentSupportingAthlete from '../assets/ParentSupportingAthlete.webp';
 import FamilyMomentsAndGrowth from '../assets/FamilyMomentsAndGrowth.webp';
 import ParentsClearData from '../assets/ParentsClearData.webp';
@@ -48,18 +47,10 @@ const Parents = () => {
   }));
 
   return (
-    <>
-      <SEOHead
-        title="Help Your Athlete Develop Leadership Traits Coaches Value | Sports Character Evaluation"
-        description="Help your athlete develop leadership traits coaches value. Sports character evaluation tools that reveal hidden potential and create recruiting advantages."
-        keywords="sports character evaluation, leadership traits in sports, how to measure athlete leadership, traits college coaches look for, high character athlete definition"
-        ogTitle="Parent Resources - GYMNAZE Athlete Development Platform"
-        ogDescription="Support your athlete's development with tools that measure character, leadership, and the mental traits that create lasting success."
-      />
-      <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
-        
-        {/* Hero Section */}
-        <section aria-label="Page introduction">
+    <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
+      
+      {/* Hero Section */}
+      <section aria-label="Page introduction">
         <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 6 } }}>
           <ScrollReveal direction="up" delay={0.1}>
             <Typography
@@ -321,8 +312,7 @@ const Parents = () => {
           </FadeIn>
         </Container>
       </section>
-      </Box>
-    </>
+    </Box>
   );
 };
 
