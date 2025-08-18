@@ -254,7 +254,8 @@
           📧 You're receiving this because you subscribed to our newsletter on {{subscription_date}}.
         </p>
         <p style="margin: 5px 0 0 0;">
-          <a href="{{unsubscribe_link}}" class="unsubscribe-link">Unsubscribe from future emails</a>
+          <!-- XSS Security Fix: Use relative URL path for unsubscribe to prevent javascript: injection -->
+          <a href="/unsubscribe?token={{unsubscribe_token}}" class="unsubscribe-link">Unsubscribe from future emails</a>
         </p>
       </div>
     </div>

@@ -73,7 +73,7 @@ const HomePage = () => {
         <HeroSection />
         
         {/* ===== Explainer Video Section ===== */}
-        <ExplainerVideoSection />
+        {/* <ExplainerVideoSection /> */}
         
         {/* ===== Problem Section ===== */}
         <ProblemSection />

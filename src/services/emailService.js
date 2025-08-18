@@ -95,7 +95,7 @@ export const sendNewsletterUserEmail = async (subscriberData) => {
       interest: subscriberData.interest || '',
       subscription_date: new Date().toLocaleDateString(),
       reply_to: EMAILJS_CONFIG.ceoEmail,
-      unsubscribe_link: `${import.meta.env.VITE_SITE_URL || 'https://gymnaze.com'}/unsubscribe?token=${subscriberData.unsubscribeToken}`,
+      // XSS Security Fix: Only pass the token, template uses relative URL
       unsubscribe_token: subscriberData.unsubscribeToken
     };
 
